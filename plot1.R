@@ -3,12 +3,15 @@
 # Course Project 1
 # Plot 1
 
-# Load utility function for loading the data
+# Load utility function for loading and filtering
 source("loaddata.R")
 
 # Load the data
-data <- loaddata()
+data <- loadData()
+# Filter the data for the wanted dates
+data <- filterDataByDate(data)
 
+# Create plot function
 createPlot1 <- function() {
     hist(data$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (kilowatts)", col = "red")
 }

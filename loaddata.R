@@ -1,12 +1,33 @@
 
 # Provide utility function for loading an filtering the data
-loaddata <- function() {
+loadData <- function() {
     # Set file name
     fileName <- "data/household_power_consumption.txt"
-    
+    if(!file.exists(fileName)) {
+        downloadAndUnzip(fileName)
+    }
+
     # Load data
     data <- read.csv(fileName, header = TRUE, sep = ";", na.string = "?", stringsAsFactors = FALSE)
+    data
+}
+
+downloadAndUnzip <- function(fileName) {
+    # URL of the dataset
+    url <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
+    zipFileName <- "data/exdata_data_household_power_consumption.zip"
     
+    if(!file.exists("./data")) { create.dir("data") }
+    
+    # Download dataset if its missing
+    if(!file.exists(zipFileName)) {
+        download.file(url, zipFileName, mode = "wb")
+    }
+    
+    unzip(zipFileName, exdir = "data")    
+}
+
+filterDataByDate <- function(data) {
     # Copy selected rows to new data frame
     filtered_data <- data[data$Date=="1/2/2007" | data$Date=="2/2/2007", ]
     

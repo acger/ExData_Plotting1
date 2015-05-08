@@ -3,12 +3,15 @@
 # Course Project 1
 # Plot 3
 
-# Load utility function for loading the data
+# Load utility function for loading and filtering
 source("loaddata.R")
 
 # Load the data
-data <- loaddata()
+data <- loadData()
+# Filter the data for the wanted dates
+data <- filterDataByDate(data)
 
+# Create plot function
 createPlot3 <- function() {
     with(data, {
         plot(DateTime, Sub_metering_1, ylab = "Energy sub metering", xlab = "", type = "n")

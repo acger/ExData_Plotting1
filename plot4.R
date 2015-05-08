@@ -3,12 +3,15 @@
 # Course Project 1
 # Plot 4
 
-# Load utility function for loading the data
+# Load utility function for loading and filtering
 source("loaddata.R")
 
 # Load the data
-data <- loaddata()
+data <- loadData()
+# Filter the data for the wanted dates
+data <- filterDataByDate(data)
 
+# Create plot functions
 createPlot2 <- function() {
     with(data, plot(DateTime, Global_active_power, type="l", ylab="Global Active Power (kilowatts)", xlab = ""))
 }
@@ -34,5 +37,6 @@ createPlot2()
 with(data, plot(DateTime, Voltage, type="l"))
 createPlot3()
 with(data, plot(DateTime, Global_reactive_power, type="l"))
+
 # Close graphics device
 dev.off()
